@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/estilo.css">
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <title>JQuery</title>
+
+    <script type="text/javascript"> 
+        $(function () {
+            $(".slider div:gt(0)").hide();
+
+            setInterval(function () {
+                $(".slider div:first-child").fadeOut(1)
+                    .next("div").fadeIn(500)
+                    .end().appendTo(".slider");
+            }, 3000);
+        });
+
+        $(function () {
+
+            var elem = $('#imagen');
+            $('#btn1').click(function () {
+                elem.slideDown();
+            })
+
+            $('#btn2').click(function () {
+                elem.slideUp();
+            })
+        });
+
+        $(function () {
+            $('#carga').click(function () {
+                var esperar = 2000;
+                $.ajax({
+                    url: "contenido.html",
+                    beforeSend: function () {
+                        $('#conte').text('Cargando...');
+                    },
+                    success: function (data) {
+                        setTimeout(function () {
+                            $('#conte').html(data);
+                        }, esperar
+                        );
+                    }
+                });
+            });
+        });
+
+        $(function () {
+            $("#clickme").click(function () {
+                $("#imagen1 ").animate({
+                    opacity: 0.25,
+                    left: "+=50",
+                    height: "toggle"
+                }, 5000, function () {
+                    // Animation complete.
+                });
+            });
+
+        });
+
+        $(function(){
+            var elem = $('#menu');
+            $('#oculta').click(function () {
+                elem.slideUp();
+            })
+        });
+
+
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="cabeza">Efectos en JQuery</div>
+
+        <div class="menu">
+            <div id="menu">
+                <ul>
+                    <li><a>Menu</a></li>
+                    <li><a>Info</a></li>
+                    <li><a>Contactos</a></li>
+                    <li><a>Perfil</a></li>
+                    <li><a>Mapa</a></li>
+                    
+                </ul>
+            </div>
+            <button type="button" id="oculta">Ocultar menu</button>
+        </div>
+
+        <div class="slider">
+            <div><img src="/img/slide1.jpg" alt="slide1"></div>
+            <div><img src="/img/slide2.jpg" alt="slide2"></div>
+            <div><img src="/img/slide3.jpg" alt="slide3"></div>
+            <div><img src="/img/slide4.jpg" alt="slide4"></div>
+        </div>
+
+        <div class="externo">
+            <div class="cont" id="conte">
+
+            </div>
+            <button type="button" id="carga">Cargar</button>
+        </div>
+
+        <div class="ajax">op4</div>
+
+
+        <div class="transicion">
+            <button id="clickme">Click</button>
+            <img id="imagen1" src="/img/img2.jpg" alt="imagen2">
+
+        </div>
+
+        <div class="ejemplo">
+            <div id="imagen"><img src="/img/img.jpg" alt="imagenx"></div>
+            <button id="btn1">Mostrar</button>
+            <button id="btn2">ocultar</button>
+        </div>
+
+        <div class="footer">Chrsitian Eduardo Camarena Hernández.</div>
+    </div>
+
+
+</body>
+
+</html>
